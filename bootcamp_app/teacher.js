@@ -7,7 +7,8 @@ const pool = new Pool({
   database: "bootcampx",
 });
 
-pool.query(`
+pool.query(queryString, values);
+(`
 SELECT DISTINCT teachers.name as teacher, cohorts.name as cohort
 FROM teachers
 JOIN assistance_requests ON teacher_id = teachers.id
