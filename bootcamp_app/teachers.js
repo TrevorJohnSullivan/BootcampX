@@ -13,14 +13,16 @@ const queryString = `
   JOIN assistance_requests ON teacher_id = teachers.id
   JOIN students ON student_id = students.id
   JOIN cohorts ON cohort_id = cohorts.id
-  WHERE cohorts.name = $1
+  WHERE cohorts.name LIKE $1
   ORDER BY teacher;
   `;
 
   const cohortName = process.argv[2];
   const values = [`${cohortName}`];
 
-pool.query(queryString, values)
+
+pool
+  .query(queryString, values)
   .then((res) => {
     res.rows.forEach(row => {
       console.log(
